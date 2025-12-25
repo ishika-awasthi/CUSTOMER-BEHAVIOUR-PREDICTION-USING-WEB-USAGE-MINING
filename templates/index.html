@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Behaviour Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>🛒 Customer Behaviour Prediction</h1>
+      <p>Enter session details to predict whether a customer will make a purchase.</p>
+    </header>
+
+    <main class="grid">
+
+      <!-- FORM SECTION -->
+      <section class="card">
+        <h2>📋 Input Features</h2>
+
+        <form id="predictForm">
+
+          <h3>Numerical Features</h3>
+
+          <label>Administrative
+            <input type="number" name="Administrative" required>
+          </label>
+
+          <label>Administrative Duration
+            <input type="number" name="Administrative_Duration" step="0.1" required>
+          </label>
+
+          <label>Informational
+            <input type="number" name="Informational" required>
+          </label>
+
+          <label>Informational Duration
+            <input type="number" name="Informational_Duration" step="0.1" required>
+          </label>
+
+          <label>Product Related
+            <input type="number" name="ProductRelated" required>
+          </label>
+
+          <label>Product Related Duration
+            <input type="number" name="ProductRelated_Duration" step="0.1" required>
+          </label>
+
+          <label>Bounce Rates
+            <input type="number" name="BounceRates" step="0.001" required>
+          </label>
+
+          <label>Exit Rates
+            <input type="number" name="ExitRates" step="0.001" required>
+          </label>
+
+          <label>Page Values
+            <input type="number" name="PageValues" step="0.1" required>
+          </label>
+
+          <label>Special Day
+            <input type="number" name="SpecialDay" min="0" max="1" step="0.1" required>
+          </label>
+
+          <h3>Categorical / Encoded Features</h3>
+
+          <label>Month (Encoded)
+            <input type="number" name="Month" required>
+          </label>
+
+          <label>Operating Systems
+            <input type="number" name="OperatingSystems" required>
+          </label>
+
+          <label>Browser
+            <input type="number" name="Browser" required>
+          </label>
+
+          <label>Region
+            <input type="number" name="Region" required>
+          </label>
+
+          <label>Traffic Type
+            <input type="number" name="TrafficType" required>
+          </label>
+
+          <label>Visitor Type (Encoded)
+            <input type="number" name="VisitorType" required>
+          </label>
+
+          <label>Weekend
+            <select name="Weekend" required>
+              <option value="1">True</option>
+              <option value="0">False</option>
+            </select>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit">🔮 Get Prediction</button>
+            <button type="reset" class="secondary">Reset</button>
+          </div>
+
+        </form>
+      </section>
+
+      <!-- RESULT SECTION -->
+      <section class="card">
+        <h2>📊 Prediction Result</h2>
+
+        {% if prediction %}
+          <div class="result-box">
+            <strong>{{ prediction }}</strong>
+          </div>
+        {% else %}
+          <div class="result-box">
+            Fill the form and click <b>Get Prediction</b>
+          </div>
+        {% endif %}
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+

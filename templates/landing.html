@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Behaviour Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body class="landing-page">
+  <div class="landing-inner">
+
+    <div class="landing-content">
+      <h1 class="main-title">🛒 Customer Behaviour Prediction</h1>
+
+      <div class="tagline">
+        <h2>
+          <span>Ever wondered</span> if an online shopper will
+          <span class="hover-glow">just browse</span> or
+          <span class="hover-glow">make a purchase</span>?
+        </h2>
+
+        <p>
+          Our system predicts customer purchase intention using
+          <span class="highlight">Web Usage Mining</span> and
+          <span class="highlight">Machine Learning</span>.
+        </p>
+      </div>
+
+      <!-- IMPORTANT FIX -->
+      <a href="/predict-page">
+        <button class="start-btn">🚀 Start Prediction</button>
+      </a>
+    </div>
+
+    <div class="landing-image">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/1170/1170576.png"
+        alt="Shopping AI"
+      >
+    </div>
+
+  </div>
+</body>
+</html>
