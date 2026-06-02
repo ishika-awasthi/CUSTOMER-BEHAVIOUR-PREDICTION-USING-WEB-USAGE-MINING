@@ -20,11 +20,6 @@ The objective of this project is to:
 
 ---
 
-Here is a **clear, academic, ready-to-paste Dataset Description** section.
-You can use it **as-is** in your report or README.
-
----
-
 ## 📂 Dataset Description
 
 The **Online Shoppers Purchasing Intention Dataset** contains real-world e-commerce session data collected from an online retail website. Each record represents a **single user session**, capturing browsing behavior, interaction patterns, and session characteristics.
