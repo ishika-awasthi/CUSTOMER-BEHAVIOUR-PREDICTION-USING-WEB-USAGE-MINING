@@ -1,69 +1,101 @@
 document.getElementById("predictForm").addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  // Collect input values
+  const resultBox = document.getElementById("result");
+  resultBox.textContent = "⏳ Predicting...";
+  resultBox.className = "result-box result-waiting";
+
+  // Collect values using the correct IDs matching index.html
   const data = {
-    Administrative: parseFloat(document.getElementById("administrative").value),
-    Administrative_Duration: parseFloat(document.getElementById("administrative_duration").value),
-    Informational: parseFloat(document.getElementById("informational").value),
-    Informational_Duration: parseFloat(document.getElementById("informational_duration").value),
-    ProductRelated: parseFloat(document.getElementById("product_related").value),
-    ProductRelated_Duration: parseFloat(document.getElementById("product_related_duration").value),
-    BounceRates: parseFloat(document.getElementById("bounce_rates").value),
-    ExitRates: parseFloat(document.getElementById("exit_rates").value),
-    PageValues: parseFloat(document.getElementById("page_values").value),
-    SpecialDay: parseFloat(document.getElementById("special_day").value),
-    Month: parseInt(document.getElementById("month").value),
-    OperatingSystems: parseInt(document.getElementById("operating_system").value),
-    Browser: parseInt(document.getElementById("browser").value),
-    Region: parseInt(document.getElementById("region").value),
-    TrafficType: parseInt(document.getElementById("traffic_type").value),
-    VisitorType: parseInt(document.getElementById("visitor_type").value),
-    Weekend: document.getElementById("weekend").value === "TRUE" ? 1 : 0
+    Administrative:          parseFloat(document.getElementById("Administrative").value),
+    Administrative_Duration: parseFloat(document.getElementById("Administrative_Duration").value),
+    Informational:           parseFloat(document.getElementById("Informational").value),
+    Informational_Duration:  parseFloat(document.getElementById("Informational_Duration").value),
+    ProductRelated:          parseFloat(document.getElementById("ProductRelated").value),
+    ProductRelated_Duration: parseFloat(document.getElementById("ProductRelated_Duration").value),
+    BounceRates:             parseFloat(document.getElementById("BounceRates").value),
+    ExitRates:               parseFloat(document.getElementById("ExitRates").value),
+    PageValues:              parseFloat(document.getElementById("PageValues").value),
+    SpecialDay:              parseFloat(document.getElementById("SpecialDay").value),
+    Month:                   document.getElementById("Month").value,        // string, e.g. "May"
+    OperatingSystems:        parseInt(document.getElementById("OperatingSystems").value),
+    Browser:                 parseInt(document.getElementById("Browser").value),
+    Region:                  parseInt(document.getElementById("Region").value),
+    TrafficType:             parseInt(document.getElementById("TrafficType").value),
+    VisitorType:             document.getElementById("VisitorType").value,  // string, e.g. "Returning_Visitor"
+    Weekend:                 parseInt(document.getElementById("Weekend").value),
   };
 
-  // Call Flask API
-  const response = await fetch("/predict", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data)
-  });
+  try {
+    const response = await fetch("/predict", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
 
-  const result = await response.json();
+    const result = await response.json();
 
-  // Show result
-  const resultBox = document.getElementById("result");
-  if (result.prediction === 1) {
-    resultBox.textContent = "🟢 Likely to Purchase";
-    resultBox.className = "result-box result-success";
-  } else {
-    resultBox.textContent = "🔴 Not Likely to Purchase";
+    if (result.error) {
+      resultBox.textContent = "⚠️ Error: " + result.error;
+      resultBox.className = "result-box result-failure";
+      return;
+    }
+
+    // ── Update result box ──────────────────────────────────────────────────
+    if (result.prediction === 1) {
+      resultBox.textContent = "🟢 " + result.label;
+      resultBox.className = "result-box result-success";
+    } else {
+      resultBox.textContent = "🔴 " + result.label;
+      resultBox.className = "result-box result-failure";
+    }
+
+    // ── Update probability bars ────────────────────────────────────────────
+    const probSection = document.getElementById("probabilities");
+    probSection.style.display = "block";
+    document.getElementById("barPurchase").style.width   = result.probability_purchase + "%";
+    document.getElementById("barNoPurchase").style.width = result.probability_no_purchase + "%";
+    document.getElementById("probPurchase").textContent   = result.probability_purchase + "%";
+    document.getElementById("probNoPurchase").textContent = result.probability_no_purchase + "%";
+
+    // ── Update doughnut chart ──────────────────────────────────────────────
+    updateChart(result.probability_purchase, result.probability_no_purchase);
+
+  } catch (err) {
+    resultBox.textContent = "⚠️ Request failed: " + err.message;
     resultBox.className = "result-box result-failure";
   }
-
-  // Update chart
-  updateChart(result.prediction);
 });
 
-// Chart.js
+// ── Chart.js doughnut ────────────────────────────────────────────────────────
 let chart;
-function updateChart(prediction) {
+function updateChart(pPurchase, pNoPurchase) {
   const ctx = document.getElementById("probabilityChart").getContext("2d");
   if (chart) chart.destroy();
 
   chart = new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: ["Purchase", "No Purchase"],
+      labels: ["Will Purchase", "Won't Purchase"],
       datasets: [{
-        data: prediction === 1 ? [70, 30] : [30, 70],
-        backgroundColor: ["#2ecc71", "#e74c3c"]
+        data: [pPurchase, pNoPurchase],
+        backgroundColor: ["#2ecc71", "#e74c3c"],
+        borderColor: ["#27ae60", "#c0392b"],
+        borderWidth: 2
       }]
     },
     options: {
       responsive: true,
       plugins: {
-        legend: { position: "bottom" }
+        legend: {
+          position: "bottom",
+          labels: { color: "#ffffff", font: { size: 13 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.label}: ${ctx.parsed}%`
+          }
+        }
       }
     }
   });

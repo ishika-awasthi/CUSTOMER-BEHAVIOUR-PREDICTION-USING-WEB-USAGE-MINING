@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Behaviour Prediction</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
@@ -21,108 +22,170 @@
 
         <form id="predictForm">
 
-          <h3>Numerical Features</h3>
+          <h3>Page Interaction</h3>
 
-          <label>Administrative
-            <input type="number" name="Administrative" required>
+          <label>Administrative (pages visited)
+            <input type="number" id="Administrative" name="Administrative" value="0" min="0" required>
           </label>
 
-          <label>Administrative Duration
-            <input type="number" name="Administrative_Duration" step="0.1" required>
+          <label>Administrative Duration (seconds)
+            <input type="number" id="Administrative_Duration" name="Administrative_Duration" value="0" min="0" step="0.1" required>
           </label>
 
-          <label>Informational
-            <input type="number" name="Informational" required>
+          <label>Informational (pages visited)
+            <input type="number" id="Informational" name="Informational" value="0" min="0" required>
           </label>
 
-          <label>Informational Duration
-            <input type="number" name="Informational_Duration" step="0.1" required>
+          <label>Informational Duration (seconds)
+            <input type="number" id="Informational_Duration" name="Informational_Duration" value="0" min="0" step="0.1" required>
           </label>
 
-          <label>Product Related
-            <input type="number" name="ProductRelated" required>
+          <label>Product Related (pages visited)
+            <input type="number" id="ProductRelated" name="ProductRelated" value="1" min="0" required>
           </label>
 
-          <label>Product Related Duration
-            <input type="number" name="ProductRelated_Duration" step="0.1" required>
+          <label>Product Related Duration (seconds)
+            <input type="number" id="ProductRelated_Duration" name="ProductRelated_Duration" value="30" min="0" step="0.1" required>
           </label>
 
-          <label>Bounce Rates
-            <input type="number" name="BounceRates" step="0.001" required>
+          <h3>Behavioural Metrics</h3>
+
+          <label>Bounce Rates (0.0 – 1.0)
+            <input type="number" id="BounceRates" name="BounceRates" value="0.02" min="0" max="1" step="0.001" required>
           </label>
 
-          <label>Exit Rates
-            <input type="number" name="ExitRates" step="0.001" required>
+          <label>Exit Rates (0.0 – 1.0)
+            <input type="number" id="ExitRates" name="ExitRates" value="0.04" min="0" max="1" step="0.001" required>
           </label>
 
           <label>Page Values
-            <input type="number" name="PageValues" step="0.1" required>
+            <input type="number" id="PageValues" name="PageValues" value="0" min="0" step="0.1" required>
           </label>
 
-          <label>Special Day
-            <input type="number" name="SpecialDay" min="0" max="1" step="0.1" required>
+          <label>Special Day (0.0 = normal, 1.0 = special)
+            <input type="number" id="SpecialDay" name="SpecialDay" value="0" min="0" max="1" step="0.2" required>
           </label>
 
-          <h3>Categorical / Encoded Features</h3>
+          <h3>Session Attributes</h3>
 
-          <label>Month (Encoded)
-            <input type="number" name="Month" required>
+          <label>Month
+            <select id="Month" name="Month" required>
+              <option value="Feb">February</option>
+              <option value="Mar">March</option>
+              <option value="May" selected>May</option>
+              <option value="June">June</option>
+              <option value="Jul">July</option>
+              <option value="Aug">August</option>
+              <option value="Sep">September</option>
+              <option value="Oct">October</option>
+              <option value="Nov">November</option>
+              <option value="Dec">December</option>
+            </select>
           </label>
 
-          <label>Operating Systems
-            <input type="number" name="OperatingSystems" required>
+          <label>Operating System
+            <select id="OperatingSystems" name="OperatingSystems" required>
+              <option value="1">Windows</option>
+              <option value="2">Mac</option>
+              <option value="3">Linux</option>
+              <option value="4">Android</option>
+              <option value="5">iOS</option>
+              <option value="6">Other</option>
+            </select>
           </label>
 
           <label>Browser
-            <input type="number" name="Browser" required>
+            <select id="Browser" name="Browser" required>
+              <option value="1">Chrome</option>
+              <option value="2">Firefox</option>
+              <option value="3">Safari</option>
+              <option value="4">Edge</option>
+              <option value="5">Opera</option>
+              <option value="6">Other</option>
+            </select>
           </label>
 
           <label>Region
-            <input type="number" name="Region" required>
+            <select id="Region" name="Region" required>
+              <option value="1">Region 1</option>
+              <option value="2">Region 2</option>
+              <option value="3">Region 3</option>
+              <option value="4">Region 4</option>
+              <option value="5">Region 5</option>
+              <option value="6">Region 6</option>
+              <option value="7">Region 7</option>
+              <option value="8">Region 8</option>
+              <option value="9">Region 9</option>
+            </select>
           </label>
 
-          <label>Traffic Type
-            <input type="number" name="TrafficType" required>
+          <label>Traffic Type (1–20)
+            <input type="number" id="TrafficType" name="TrafficType" value="2" min="1" max="20" required>
           </label>
 
-          <label>Visitor Type (Encoded)
-            <input type="number" name="VisitorType" required>
+          <label>Visitor Type
+            <select id="VisitorType" name="VisitorType" required>
+              <option value="Returning_Visitor">Returning Visitor</option>
+              <option value="New_Visitor">New Visitor</option>
+              <option value="Other">Other</option>
+            </select>
           </label>
 
           <label>Weekend
-            <select name="Weekend" required>
-              <option value="1">True</option>
-              <option value="0">False</option>
+            <select id="Weekend" name="Weekend" required>
+              <option value="0">No</option>
+              <option value="1">Yes</option>
             </select>
           </label>
 
           <div class="form-actions">
             <button type="submit">🔮 Get Prediction</button>
-            <button type="reset" class="secondary">Reset</button>
+            <button type="reset" class="secondary">↺ Reset</button>
           </div>
 
         </form>
       </section>
 
       <!-- RESULT SECTION -->
-      <section class="card">
+      <section class="card result-card">
         <h2>📊 Prediction Result</h2>
 
-        {% if prediction %}
-          <div class="result-box">
-            <strong>{{ prediction }}</strong>
+        <div id="result" class="result-box result-waiting">
+          Fill the form and click <b>Get Prediction</b>
+        </div>
+
+        <div id="probabilities" class="prob-container" style="display:none;">
+          <div class="prob-row">
+            <span class="prob-label">🟢 Will Purchase</span>
+            <div class="prob-bar-wrap">
+              <div id="barPurchase" class="prob-bar bar-green"></div>
+            </div>
+            <span id="probPurchase" class="prob-pct">0%</span>
           </div>
-        {% else %}
-          <div class="result-box">
-            Fill the form and click <b>Get Prediction</b>
+          <div class="prob-row">
+            <span class="prob-label">🔴 Won't Purchase</span>
+            <div class="prob-bar-wrap">
+              <div id="barNoPurchase" class="prob-bar bar-red"></div>
+            </div>
+            <span id="probNoPurchase" class="prob-pct">0%</span>
           </div>
-        {% endif %}
+        </div>
+
+        <canvas id="probabilityChart" width="300" height="300"></canvas>
+
+        <div class="model-info">
+          <h3>ℹ️ Model Info</h3>
+          <p>Algorithm: <strong>Random Forest</strong> (100 trees)</p>
+          <p>Dataset: Online Shoppers Purchasing Intention (12,330 sessions)</p>
+          <p>Accuracy: <strong>89.7%</strong></p>
+          <p>Features: 17 behavioural &amp; session attributes</p>
+        </div>
       </section>
 
     </main>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{{ url_for('static', filename='app.js') }}"></script>
-

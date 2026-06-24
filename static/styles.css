@@ -1,143 +1,30 @@
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: #121212; 
-  color: #ffffff; 
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-
-header {
-  text-align: center;
-  padding: 20px;
-  background: #000000; 
-  color: #00ff90; 
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-
-.card {
-  background: #1e1e1e; 
-  padding: 20px;
-  border-radius: 15px;
-  border: 2px solid #00ffff;
-  color: #ffffff;
-}
-
-.card h2 {
-  margin-top: 0;
-  color: #ffcc00; 
-}
-
-form label {
-  display: block;
-  margin: 10px 0;
-  font-weight: bold;
-  color: #00ff90; 
-}
-
-form input, form select {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-  border-radius: 6px;
-  border: 2px solid #ffcc00; 
-  background: #000000;
-  color: #ffffff;
-}
-
-form input:focus, form select:focus {
-  outline: none;
-  border-color: #00ffff; 
-  box-shadow: 0 0 5px #00ffff;
-}
-
-.form-actions {
-  margin-top: 15px;
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  background: #00ff90;
-  color: #000000;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-button.secondary {
-  background: #ff0055; 
-  color: #ffffff;
-}
-
-button:hover {
-  opacity: 0.9;
-}
-
-.result-box {
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 10px;
-  text-align: center;
-  font-weight: bold;
-  border: 2px solid #ffffff;
-  background: #2a2a2a;
-  color: #ffffff;
-}
-
-.result-success {
-  background: #004d00;
-  border: 2px solid #00ff90;
-  color: #00ff90;
-}
-
-.result-failure {
-  background: #4d0000;
-  border: 2px solid #ff3333;
-  color: #ff3333;
-}
-
-* {
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* ── Base ────────────────────────────────────────────────────────────────── */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #0d0d0d;
+  color: #e0e0e0;
+  min-height: 100vh;
+}
+
+/* ── Landing Page ────────────────────────────────────────────────────────── */
 .landing-page {
   height: 100vh;
   width: 100vw;
-  background: #000000;
-  color: #ffffff;
-  font-family: Arial, sans-serif;
+  background: #000;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 10px solid #00ffff;
-  border-radius: 10px;
-  box-shadow: 0 0 40px #00ffff inset, 0 0 40px #00ffff;
-  padding: 20px;
+  border: 8px solid #00ffff;
+  border-radius: 12px;
+  box-shadow: 0 0 40px #00ffff44 inset, 0 0 40px #00ffff44;
+  overflow: hidden;
 }
 
 .landing-inner {
@@ -146,74 +33,312 @@ button:hover {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 40px;
+  padding: 60px;
+  gap: 40px;
 }
+
+.landing-content { flex: 1; }
 
 .main-title {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 2.8rem;
+  font-weight: 800;
   color: #00ff90;
-  text-shadow: 0 0 20px #00ff90;
-}
-
-.tagline {
-  margin-top: 40px;
-  font-size: 2rem;
-  text-align: left;
-  line-height: 1.6;
+  text-shadow: 0 0 18px #00ff90;
+  margin-bottom: 30px;
 }
 
 .tagline h2 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-shadow: 0 0 20px #00ffff;
+  font-size: 1.9rem;
+  color: #fff;
+  text-shadow: 0 0 12px #00ffff;
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 .tagline p {
-  font-size: 1.8rem;
+  font-size: 1.3rem;
   color: #ffcc00;
 }
 
 .highlight {
   color: #00ff90;
   font-weight: bold;
-  text-shadow: 0 0 15px #00ff90;
+  text-shadow: 0 0 10px #00ff90;
 }
 
 .hover-glow {
   color: #ff66ff;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  cursor: default;
+  transition: all 0.3s;
 }
 
 .hover-glow:hover {
   color: #00ffff;
-  text-shadow: 0 0 25px #00ffff;
-}
-
-.landing-image img {
-  max-width: 100%;
-  height: auto;
-  max-height: 70vh;
-  object-fit: contain;
-  filter: drop-shadow(0 0 25px #00ffff);
+  text-shadow: 0 0 20px #00ffff;
 }
 
 .start-btn {
-  margin-top: 30px;
-  padding: 20px 45px;
-  font-size: 1.5rem;
-  font-weight: bold;
+  margin-top: 36px;
+  padding: 18px 44px;
+  font-size: 1.3rem;
+  font-weight: 700;
   border: none;
   border-radius: 50px;
   background: #00ff90;
-  color: #000000;
+  color: #000;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
+  display: inline-block;
 }
 
 .start-btn:hover {
   background: #00ffff;
-  box-shadow: 0 0 30px #00ffff;
+  box-shadow: 0 0 28px #00ffff;
+  transform: scale(1.04);
+}
+
+.landing-image img {
+  max-width: 380px;
+  width: 100%;
+  filter: drop-shadow(0 0 24px #00ffff88);
+}
+
+/* ── Predict Page ────────────────────────────────────────────────────────── */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+header {
+  text-align: center;
+  padding: 24px;
+  background: #000;
+  color: #00ff90;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  border: 2px solid #00ff9044;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+header p { color: #aaa; font-size: 1rem; }
+
+/* ── Grid ────────────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.card {
+  background: #1a1a1a;
+  padding: 24px;
+  border-radius: 16px;
+  border: 2px solid #00ffff44;
+}
+
+.card h2 {
+  margin-bottom: 18px;
+  color: #ffcc00;
+  font-size: 1.2rem;
+}
+
+.card h3 {
+  margin: 20px 0 10px;
+  color: #00ffff;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #00ffff33;
+  padding-bottom: 6px;
+}
+
+/* ── Form ────────────────────────────────────────────────────────────────── */
+form label {
+  display: block;
+  margin: 10px 0 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #00ff90;
+}
+
+form input, form select {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 4px;
+  border-radius: 7px;
+  border: 1.5px solid #ffcc0066;
+  background: #111;
+  color: #fff;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+form input:focus, form select:focus {
+  outline: none;
+  border-color: #00ffff;
+  box-shadow: 0 0 6px #00ffff88;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+}
+
+button[type="submit"] {
+  flex: 2;
+  padding: 12px;
+  border: none;
+  border-radius: 9px;
+  background: #00ff90;
+  color: #000;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+button[type="submit"]:hover {
+  background: #00ffcc;
+  box-shadow: 0 0 16px #00ff9088;
+  transform: translateY(-1px);
+}
+
+button[type="reset"] {
+  flex: 1;
+  padding: 12px;
+  border: 1.5px solid #ff0055;
+  border-radius: 9px;
+  background: transparent;
+  color: #ff0055;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+button[type="reset"]:hover {
+  background: #ff0055;
+  color: #fff;
+}
+
+/* ── Result Box ──────────────────────────────────────────────────────────── */
+.result-box {
+  padding: 18px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border: 2px solid #444;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+
+.result-waiting {
+  background: #1e1e1e;
+  border-color: #444;
+  color: #888;
+}
+
+.result-success {
+  background: #0a2e0a;
+  border-color: #00ff90;
+  color: #00ff90;
+  box-shadow: 0 0 20px #00ff9044;
+}
+
+.result-failure {
+  background: #2e0a0a;
+  border-color: #ff4444;
+  color: #ff4444;
+  box-shadow: 0 0 20px #ff444444;
+}
+
+/* ── Probability Bars ────────────────────────────────────────────────────── */
+.prob-container {
+  margin-bottom: 20px;
+}
+
+.prob-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.prob-label {
+  font-size: 0.82rem;
+  min-width: 130px;
+  color: #ccc;
+}
+
+.prob-bar-wrap {
+  flex: 1;
+  background: #333;
+  border-radius: 6px;
+  height: 14px;
+  overflow: hidden;
+}
+
+.prob-bar {
+  height: 100%;
+  border-radius: 6px;
+  width: 0%;
+  transition: width 0.6s ease;
+}
+
+.bar-green { background: linear-gradient(to right, #00c853, #00ff90); }
+.bar-red   { background: linear-gradient(to right, #c0392b, #ff4444); }
+
+.prob-pct {
+  font-size: 0.85rem;
+  font-weight: 700;
+  min-width: 40px;
+  text-align: right;
+  color: #fff;
+}
+
+/* ── Chart ───────────────────────────────────────────────────────────────── */
+#probabilityChart {
+  display: block;
+  margin: 0 auto 24px;
+  max-width: 260px;
+}
+
+/* ── Model Info ──────────────────────────────────────────────────────────── */
+.model-info {
+  border-top: 1px solid #333;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.model-info h3 {
+  font-size: 0.9rem;
+  color: #ffcc00;
+  margin-bottom: 10px;
+}
+
+.model-info p {
+  font-size: 0.83rem;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.model-info strong { color: #fff; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr; }
+  .landing-inner { flex-direction: column; text-align: center; padding: 30px 20px; }
+  .landing-image img { max-width: 220px; }
+  .main-title { font-size: 2rem; }
+  .tagline h2 { font-size: 1.4rem; }
+  .tagline p  { font-size: 1rem; }
 }
